@@ -10,4 +10,5 @@ package org.centrale.projet.jeudedame;
  */
 public class Dame extends Pion {
     
+    
 }

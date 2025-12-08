@@ -12,10 +12,32 @@ import java.util.List;
  * @author Max
  */
 public class Pion {
-
-    Point2D pos;
+    Point2D position;
     String couleur;
     Plateau plateau;
+    
+    
+    public void deplace(int a){
+        if (this.couleur=="blanc"){
+            if (a==1){
+                this.position.setY(this.position.getY()-1);
+                this.position.setX(this.position.getX()+1);    
+            }else{
+                this.position.setY(this.position.getY()+1);
+                this.position.setX(this.position.getX()+1);
+            }
+        }else{
+            if (a==1){
+                this.position.setY(this.position.getY()-1);
+                this.position.setX(this.position.getX()-1);    
+            }else{
+                this.position.setY(this.position.getY()+1);
+                this.position.setX(this.position.getX()-1);
+            }
+        }
+    }
+
+
 
     public List<Pion> doitManger() {
         List<Pion> maListePion = new ArrayList<>();
@@ -31,14 +53,14 @@ public class Pion {
         }
 
         // 2) Cases adjacentes diagonales autour de CE pion
-        maListePionPos.add(new Point2D(this.pos.getX() + 1, this.pos.getY() + 1));
-        maListePionPos.add(new Point2D(this.pos.getX() - 1, this.pos.getY() + 1));
-        maListePionPos.add(new Point2D(this.pos.getX() + 1, this.pos.getY() - 1));
-        maListePionPos.add(new Point2D(this.pos.getX() - 1, this.pos.getY() - 1));
+        maListePionPos.add(new Point2D(this.position.getX() + 1, this.position.getY() + 1));
+        maListePionPos.add(new Point2D(this.position.getX() - 1, this.position.getY() + 1));
+        maListePionPos.add(new Point2D(this.position.getX() + 1, this.position.getY() - 1));
+        maListePionPos.add(new Point2D(this.position.getX() - 1, this.position.getY() - 1));
 
         // 3) Parcourir TOUS les pions adverses
         for (Pion pionAdv : maListePionTotal) {
-            if (maListePionPos.contains(pionAdv.getPos())) {
+            if (maListePionPos.contains(pionAdv.getPosition())) {
 
                 if (peutSauterParDessus(pionAdv)) {
                     maListePion.add(pionAdv);
@@ -51,24 +73,24 @@ public class Pion {
     }
 
     private boolean peutSauterParDessus(Pion pionAdv) {
-        int dx = pionAdv.getPos().getX() - this.pos.getX();
-        int dy = pionAdv.getPos().getY() - this.pos.getY();
+        int dx = pionAdv.getPosition().getX() - this.position.getX();
+        int dy = pionAdv.getPosition().getY() - this.position.getY();
 
         // Case derrière le pion adverse
-        int xDerriere = pionAdv.getPos().getX() + dx;
-        int yDerriere = pionAdv.getPos().getY() + dy;
+        int xDerriere = pionAdv.getPosition().getX() + dx;
+        int yDerriere = pionAdv.getPosition().getY() + dy;
 
         // À adapter à ta représentation du plateau :
         return plateau.estDansLePlateau(xDerriere, yDerriere)
                 && plateau.caseVide(xDerriere, yDerriere);
     }
 
-    public Point2D getPos() {
-        return pos;
+    public Point2D getPosition() {
+        return position;
     }
 
-    public void setPos(Point2D pos) {
-        this.pos = pos;
+    public void setPosition(Point2D pos) {
+        this.position = pos;
     }
 
     public String getCouleur() {
