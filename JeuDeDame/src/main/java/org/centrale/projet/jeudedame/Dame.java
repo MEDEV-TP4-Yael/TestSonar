@@ -4,11 +4,13 @@
  */
 package org.centrale.projet.jeudedame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Max
  */
 public class Dame extends Pion {
-    
-    
+    boolean estDame(){ return true; }
 }
