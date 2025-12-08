@@ -15,6 +15,17 @@ public class Pion {
     Point2D position;
     String couleur;
     Plateau plateau;
+
+    public Pion(Point2D position, String couleur,Plateau plateau) {
+        this.position = position;
+        this.couleur = couleur;
+        this.plateau = plateau;
+    }
+
+    public Pion() {
+    }
+    
+    
     
     
     public void deplace(int a){
@@ -52,13 +63,13 @@ public class Pion {
             return maListePion; // couleur inconnue
         }
 
-        // 2) Cases adjacentes diagonales autour de CE pion
+        // Cases adjacentes diagonales autour de ce pion
         maListePionPos.add(new Point2D(this.position.getX() + 1, this.position.getY() + 1));
         maListePionPos.add(new Point2D(this.position.getX() - 1, this.position.getY() + 1));
         maListePionPos.add(new Point2D(this.position.getX() + 1, this.position.getY() - 1));
         maListePionPos.add(new Point2D(this.position.getX() - 1, this.position.getY() - 1));
 
-        // 3) Parcourir TOUS les pions adverses
+        // Parcourir TOUS les pions adverses
         for (Pion pionAdv : maListePionTotal) {
             if (maListePionPos.contains(pionAdv.getPosition())) {
 

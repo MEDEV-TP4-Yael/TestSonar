@@ -5,7 +5,6 @@
 package org.centrale.projet.jeudedame;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -21,9 +20,9 @@ public class Plateau {
         for (int i = 0; i<=10;i++){
             for(int j=0;j<=4;j++){
                 if (i%2==0 && j%2==0){
-                    maListePionBlanc.add(new Pion(new Point2D(i,j),"blanc"));
+                    maListePionBlanc.add(new Pion(new Point2D(i,j),"blanc",this));
                 }else if(i%2==1 && j%2==1){
-                    maListePionBlanc.add(new Pion(new Point2D(i,j),"blanc"));
+                    maListePionBlanc.add(new Pion(new Point2D(i,j),"blanc",this));
                 }        
                 
             }
@@ -31,9 +30,9 @@ public class Plateau {
         for (int i = 0; i<=10;i++){
             for(int j=6;j<=9;j++){
                 if (i%2==0 && j%2==0){
-                    maListePionNoir.add(new Pion(new Point2D(i,j),"blanc"));
+                    maListePionNoir.add(new Pion(new Point2D(i,j),"blanc",this));
                 }else if(i%2==1 && j%2==1){
-                    maListePionNoir.add(new Pion(new Point2D(i,j),"blanc"));
+                    maListePionNoir.add(new Pion(new Point2D(i,j),"blanc",this));
                 }        
                 
             }
@@ -42,21 +41,62 @@ public class Plateau {
     
     public void affichePlateau(){
         String[][] plateau = new String[50][50];
-        Point2D a =new Point2D();
+        Point2D a = new Point2D();
         for (int i=0;i<50;i++){
             for( int j=0; j<50;j++){
                 plateau[i][j]=". ";
             }
         }
         for (Pion p : maListePionBlanc){
-            int x =p.getPos().getPositionx();
-            int y =p.getPos().getPositiony()+25;
+            int x =p.getPosition().getX();
+            int y =p.getPosition().getY();
             plateau[x][y] = "B ";    
         }
         for (Pion p : maListePionNoir){
-            int x =p.getPos().getPositionx();
-            int y =p.getPos().getPositiony()+25;
+            int x =p.getPosition().getX();
+            int y =p.getPosition().getY();
             plateau[x][y] = "N ";
         }
     }
+
+    public ArrayList<Pion> getMaListePionBlanc() {
+        return maListePionBlanc;
+    }
+
+    public void setMaListePionBlanc(ArrayList<Pion> maListePionBlanc) {
+        this.maListePionBlanc = maListePionBlanc;
+    }
+
+    public ArrayList<Pion> getMaListePionNoir() {
+        return maListePionNoir;
+    }
+
+    public void setMaListePionNoir(ArrayList<Pion> maListePionNoir) {
+        this.maListePionNoir = maListePionNoir;
+    }
+    
+    public boolean estDansLePlateau(int x, int y) {
+    return x >= 0 && x < 8 && y >= 0 && y < 8;
+}
+
+   public boolean caseVide(int x, int y) {
+    if (!estDansLePlateau(x, y)) {
+        return false;
+    }
+    // Vérifie qu'aucun pion blanc n'est sur cette case
+    for (Pion p : getMaListePionBlanc()) {
+        if (p.getPosition().getX() == x && p.getPosition().getY() == y) {
+            return false;
+        }
+    }
+
+    // Vérifie qu'aucun pion noir n'est sur cette case
+    for (Pion p : getMaListePionNoir()) {
+        if (p.getPosition().getX() == x && p.getPosition().getY() == y) {
+            return false;
+        }
+    }
+    return true; 
+}
+    
 }
