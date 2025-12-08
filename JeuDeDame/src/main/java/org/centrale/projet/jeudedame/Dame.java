@@ -8,6 +8,6 @@ package org.centrale.projet.jeudedame;
  *
  * @author Max
  */
-public class Dame extends Pion{
+public class Dame extends Pion {
     
 }
