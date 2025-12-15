@@ -10,8 +10,8 @@ public class JeuDeDame {
 
     private Plateau plateau;
     private String joueurCourant; // "Blanc" ou "Noir"
-    private final String blanc = "Blanc"; 
-    private final String noir = "Noir";
+    private final static String blanc = "Blanc"; 
+    private final static String noir = "Noir";
 
     public JeuDeDame() {
         this.plateau = new Plateau();
@@ -20,7 +20,6 @@ public class JeuDeDame {
 
     public void demarrerNouvellePartie() {
         plateau.vider();
-        String Blanc = "Blanc";
 
         // Damier 10x10 : lignes 0..9, colonnes 0..9
         // Pions noirs en haut : lignes 0 à 3
