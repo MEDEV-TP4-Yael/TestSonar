@@ -2,8 +2,11 @@ package org.centrale.projet.jeudedame;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class MainJeuDeDame {
+
+    Logger logger = Logger.getLogger(getClass().getName());
 
     public static void main(String[] args) {
         JeuDeDame jeu = new JeuDeDame();
