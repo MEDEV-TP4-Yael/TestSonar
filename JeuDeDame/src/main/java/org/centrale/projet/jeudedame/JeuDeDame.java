@@ -5,8 +5,11 @@ package org.centrale.projet.jeudedame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class JeuDeDame {
+
+    Logger logger = Logger.getLogger(getClass().getName());
 
     private Plateau plateau;
     private String joueurCourant; // "Blanc" ou "Noir"
@@ -84,21 +87,21 @@ public class JeuDeDame {
 
     public boolean jouerCoup(Point2D origine, Point2D destination) {
     Pion pion = plateau.getPion(origine);
-    System.out.println("Test pion = " + pion);
+    logger.info("Test pion = " + pion);
     
     if (pion == null) {
-        System.out.println("Pas de pion sur la case d'origine");
+        logger.info("Pas de pion sur la case d'origine");
         return false;
     }
 
     if (!pion.getCouleur().equals(joueurCourant)) {
-        System.out.println("Ce n'est pas le tour de cette couleur");
+        logger.info("Ce n'est pas le tour de cette couleur");
         return false;
     }
 
     List<Pion> pionsObliges = getPionsQuiDoiventManger();
     boolean doitManger = !pionsObliges.isEmpty();
-    System.out.println("il doit = " + doitManger);
+    logger.info("il doit = " + doitManger);
 
     int dx = destination.getX() - origine.getX();
     int dy = destination.getY() - origine.getY();
@@ -108,14 +111,14 @@ public class JeuDeDame {
 
     // 4) S'il doit manger, on refuse les mouvements simples
     if (doitManger && !mouvementPrise) {
-        System.out.println("Un pion doit manger, déplacement simple interdit");
+        logger.info("Un pion doit manger, déplacement simple interdit");
         return false;
     }
 
     // 5) Destination doit être dans le plateau et vide
     if (!plateau.estDansLePlateau(destination.getX(), destination.getY())
             || !plateau.caseVide(destination.getX(), destination.getY())) {
-        System.out.println("Destination hors plateau ou occupée");
+        logger.info("Destination hors plateau ou occupée");
         return false;
     }
 
@@ -126,10 +129,10 @@ public class JeuDeDame {
             boolean ok = pion.deplace(dx, dy);
             if (ok) {
                 changerJoueur();
-                System.out.println("Déplacement simple effectué");
+                logger.info("Déplacement simple effectué");
                 return true;
             } else {
-                System.out.println("Déplacement simple refusé par deplace()");
+                logger.info("Déplacement simple refusé par deplace()");
                 return false;
             }
         } else {
@@ -145,18 +148,18 @@ public class JeuDeDame {
 
         Pion pionAdverse = plateau.getPion(posInter);
         if (pionAdverse == null) {
-            System.out.println("Aucun pion à manger sur la case intermédiaire");
+            logger.info("Aucun pion à manger sur la case intermédiaire");
             return false;
         }
         if (pionAdverse.getCouleur().equals(joueurCourant)) {
-            System.out.println("Le pion intermédiaire est de la même couleur");
+            logger.info("Le pion intermédiaire est de la même couleur");
             return false;
         }
 
         // Déplacement du pion (relatif)
         boolean ok = pion.deplace(dx, dy);
         if (!ok) {
-            System.out.println("Le déplacement de prise a échoué");
+            logger.info("Le déplacement de prise a échoué");
             return false;
         }
 
@@ -165,7 +168,7 @@ public class JeuDeDame {
 
         // 8) Enchaînement de prises possible ?
         if (pion.doitManger()) {  
-            System.out.println("Le même pion peut encore manger");
+            logger.info("Le même pion peut encore manger");
             // même joueur rejoue ce pion
             return true;
         } else {
@@ -175,7 +178,7 @@ public class JeuDeDame {
     }
 
     // 9) Sinon, mouvement illégal
-    System.out.println("Mouvement ni simple ni de prise");
+    logger.info("Mouvement ni simple ni de prise");
     return false;
 }
 
