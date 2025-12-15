@@ -10,8 +10,8 @@ public class JeuDeDame {
 
     private Plateau plateau;
     private String joueurCourant; // "Blanc" ou "Noir"
-    private final static String blanc = "Blanc"; 
-    private final static String noir = "Noir";
+    private static final String Blanc = "Blanc"; 
+    private static final String Noir = "Noir";
 
     public JeuDeDame() {
         this.plateau = new Plateau();
