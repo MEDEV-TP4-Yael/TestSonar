@@ -13,4 +13,5 @@ import java.util.List;
  */
 public class Dame extends Pion {
     boolean estDame(){ return true; }
+    
 }
