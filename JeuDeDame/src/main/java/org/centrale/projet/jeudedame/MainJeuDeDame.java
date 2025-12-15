@@ -6,9 +6,10 @@ import java.util.logging.Logger;
 
 public class MainJeuDeDame {
 
-    Logger logger = Logger.getLogger(getClass().getName());
-
     public static void main(String[] args) {
+
+        Logger logger = Logger.getLogger(getClass().getName());
+        
         JeuDeDame jeu = new JeuDeDame();
         Scanner sc = new Scanner(System.in);
 
