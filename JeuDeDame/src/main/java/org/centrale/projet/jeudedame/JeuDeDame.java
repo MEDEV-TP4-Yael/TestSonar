@@ -192,7 +192,7 @@ public class JeuDeDame {
         boolean blancSansPion = plateau.getMaListePionBlanc().isEmpty();
         boolean noirSansPion = plateau.getMaListePionNoir().isEmpty();
 
-        return blancSansPion || noirSansPion
+        return blancSansPion || noirSansPion;
     }
 
     public Plateau getPlateau() {
