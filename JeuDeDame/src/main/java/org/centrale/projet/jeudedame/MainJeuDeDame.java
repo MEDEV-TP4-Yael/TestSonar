@@ -9,10 +9,10 @@ public class MainJeuDeDame {
         JeuDeDame jeu = new JeuDeDame();
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("=== Jeu de Dames ===");
-        System.out.println("Plateau 10x10, coordonnées de 0 à 9.");
-        System.out.println("Saisis les coups sous la forme : xOrig yOrig xDest yDest");
-        System.out.println("Tape 'q' pour quitter.\n");
+        logger.info("=== Jeu de Dames ===");
+        logger.info("Plateau 10x10, coordonnées de 0 à 9.");
+        logger.info("Saisis les coups sous la forme : xOrig yOrig xDest yDest");
+        logger.info("Tape 'q' pour quitter.\n");
 
         while (!jeu.estFinDePartie()) {
             Plateau plateau = jeu.getPlateau();
@@ -22,25 +22,25 @@ public class MainJeuDeDame {
 
             // Infos joueur courant
             String joueur = jeu.getJoueurCourant();
-            System.out.println("C'est au tour des " + joueur + "s.");
+            logger.info("C'est au tour des " + joueur + "s.");
 
             // Pions obligés de manger ?
             List<Pion> obliges = jeu.getPionsQuiDoiventManger();
             if (!obliges.isEmpty()) {
-                System.out.println("Attention : au moins un pion doit manger !");
+                logger.info("Attention : au moins un pion doit manger !");
             }
 
             System.out.print("Entrez un coup (xOrig yOrig xDest yDest) ou 'q' pour quitter : ");
             String line = sc.nextLine().trim();
 
             if (line.equalsIgnoreCase("q")) {
-                System.out.println("Partie interrompue.");
+                logger.info("Partie interrompue.");
                 break;
             }
 
             String[] parts = line.split("\\s+");
             if (parts.length != 4) {
-                System.out.println("Format invalide. Exemple: 2 3 3 4\n");
+                logger.info("Format invalide. Exemple: 2 3 3 4\n");
                 continue;
             }
 
@@ -55,17 +55,17 @@ public class MainJeuDeDame {
                 
                 boolean ok = jeu.jouerCoup(origine, destination);
                 if (!ok) {
-                    System.out.println("Coup illégal, réessaie.\n");
+                    logger.info("Coup illégal, réessaie.\n");
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("Veuillez entrer des nombres entiers.\n");
+                logger.info("Veuillez entrer des nombres entiers.\n");
             }
         }
 
         if (jeu.estFinDePartie()) {
-            System.out.println("=== Fin de partie ===");
-            System.out.println("Les " 
+            logger.info("=== Fin de partie ===");
+            logger.info("Les " 
                 + (jeu.getPlateau().getMaListePionBlanc().isEmpty() ? "noirs" : "blancs")
                 + " ont gagné !");
         }
@@ -81,9 +81,9 @@ public class MainJeuDeDame {
      */
     private static void afficherPlateau(Plateau plateau) {
         // y du haut (9) vers le bas (0) pour que ça ressemble à un vrai plateau
-        System.out.println();
-        System.out.println("   0 1 2 3 4 5 6 7 8 9");
-        System.out.println("  ---------------------");
+        logger.info();
+        logger.info("   0 1 2 3 4 5 6 7 8 9");
+        logger.info("  ---------------------");
 
         for (int y = 9; y >= 0; y--) {
             System.out.print(y + " | ");
@@ -110,8 +110,8 @@ public class MainJeuDeDame {
 
                 System.out.print(c + " ");
             }
-            System.out.println();
+            logger.info();
         }
-        System.out.println();
+        logger.info();
     }
 }

@@ -192,12 +192,7 @@ public class JeuDeDame {
         boolean blancSansPion = plateau.getMaListePionBlanc().isEmpty();
         boolean noirSansPion = plateau.getMaListePionNoir().isEmpty();
 
-        if (blancSansPion || noirSansPion) {
-            return true;
-        }
-
-        // Tu peux ajouter ici : vérifier si aucun coup possible pour un joueur.
-        return false;
+        return blancSansPion || noirSansPion
     }
 
     public Plateau getPlateau() {
