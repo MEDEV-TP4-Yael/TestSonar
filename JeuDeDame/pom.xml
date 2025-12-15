@@ -26,8 +26,10 @@
         </dependency>
     </dependencies>
     <properties>
+        <sonar.organization>ec-nantes</sonar.organization>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>org.centrale.projet.jeudedame.JeuDeDame</exec.mainClass>
     </properties>
+    
 </project>
